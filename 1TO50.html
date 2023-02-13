@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+
+</head>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+  }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        flex-direction: column;
+    }
+
+    .top {
+        width: 346px;
+        height: 30px;
+
+        background-color: gray;
+
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        /* flex: 1 */
+
+        text-align: center;
+    }
+
+    .title {
+        width: 100px;
+        height: 20px;
+        background-color: lightblue;
+    }
+
+    .timer {
+        width: 100px;
+        height: 20px;
+        background-color: lightpink;
+    }
+
+    .retry {
+        width: 100px;
+        height: 20px;
+        background-color: lightgreen;
+    }
+
+    table {
+        width: 350px;
+        height: 350px;
+    }
+
+    tr {
+        border: 1px solid black;
+    }
+
+    td {
+        width: 20%;
+        height: 20%;
+
+        background-color: mediumpurple;
+        color: white;
+        text-align: center;
+
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    .end {
+        background-color: white;
+    }
+
+    
+</style>
+
+<body>
+    <div class="top">
+        <div class="title">1 TO 50</div>
+        <div class="timer">TIME</div>
+        <div class="retry">RETRY</div>
+    </div>
+    <table>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+
+    <script>
+        const board = [...document.querySelectorAll("td")];
+        const timer = document.querySelector(".timer")
+        const retry = document.querySelector(".retry");
+        let SIZE = 25;
+        let ENDNUMBER = 50;
+        let numBox1 = [];
+        let numBox2 = [];
+        let count = 1;
+
+        window.onload = function () {
+            init();
+        }
+
+        function init() {
+            evetadd();
+            numBox();
+            shuffle(numBox1, numBox2);
+            for (let i = 0; i < SIZE; i++) {
+                board[i].innerHTML = numBox1[i];
+            }
+        }
+
+        retry.addEventListener("click", () => {
+            reset();
+        })
+
+        function reset() {
+            init();
+            clearInterval(t);
+            timer.innerHTML = "TIME";
+            TIME = 0;
+            count = 1;
+            board.forEach((box) => {
+                box.className = "";
+            })
+
+            for (let i = 0; i < SIZE; i++) {
+                board[i].className = "";
+            }
+        }
+
+        function numBox() {
+            let num = 1;
+            for (let i = 0; i < SIZE; i++) {
+                numBox1[i] = num;
+                numBox2[i] = num + SIZE;
+                num++;
+            }
+        }
+
+        function shuffle(array1, array2) {
+            array1.sort(() => Math.random() - 0.5);
+            array2.sort(() => Math.random() - 0.5);
+        }
+
+        function evetadd() {
+            board.forEach((box) => {
+                box.addEventListener("click", () => {
+                    if (start == 0) {
+                        timerBox();
+                        start = -1;
+                    }
+                    if (box.innerText == count) {
+                        if (count > 25) {
+                            box.innerHTML = " ";
+                            box.classList = "end";
+                        } else {
+                            box.innerHTML = numBox2[count - 1];
+                        }
+                        count++;
+                        if (count > ENDNUMBER) {
+                            setTimeout(() => {
+                                alert("게임종료");
+                            }, 1)
+                            reset();
+                        }
+
+                    } else {
+
+                    }
+                })
+                box.addEventListener("mouseover", () => {
+                    event.target.style.color = "lightblue";
+                })
+
+                box.addEventListener("mouseout", () => {
+                    event.target.style.color = "white";
+                })
+            })
+        }
+
+
+
+        let start = 0;
+        let TIME = 0;
+
+        function timerBox() {
+            updateTimer();
+            t = setInterval(updateTimer, 1000);
+        }
+
+        function updateTimer() {
+            const checkMinutes = Math.floor(TIME / 60);
+            const seconds = TIME % 60;
+            const minutes = checkMinutes % 60;
+
+            timer.innerText = `${minutes < 10 ? `0${minutes}` : minutes} : ${seconds < 10 ? `0${seconds}` : seconds}`;
+            TIME++;
+        }
+
+    </script>
+</body>
+
+</html>
