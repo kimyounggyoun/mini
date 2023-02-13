@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            flex-direction: column;
+        }
+
+        .top {
+            display: flex;
+            width: 400px;
+            height: 30px;
+            justify-content: space-between;
+        }
+
+        .retry {
+            border: none;
+            width: 60px;
+            margin-right: 10px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .retry p {
+            font-weight: bold;
+        }
+
+        button{
+            width: 20px;
+            height: 20px;
+            background-image: url(http://cdn.onlinewebfonts.com/svg/img_106832.png);
+            background-size: 100%;
+        }
+
+        .title {
+            margin-left: 10px;
+            margin-bottom: 5px;
+
+            width: 50%;
+            height: 100%-5px;
+
+            font-size: 20px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        table {
+            /* 보이는 화면에 50% */
+            width: 400px;
+            height: 400px;
+            border: 2.5px solid;
+            background-color: black;
+        }
+
+        tr,
+        td {
+            /* 테이블 내용 중앙정렬 */
+            font-size: 90px;
+            text-align: center;
+            width: 33%;
+            height: 33%;
+        }
+
+        td {
+            border: 2.5px solid;
+            background-color: white;
+        }
+
+        .xBox {
+            background-color: pink;
+        }
+
+        .yBox {
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top">
+        <div class="title">
+            Tic Tac Toe
+        </div>
+        <div class="retry">
+            <p>Retry</p>
+            <button>
+            </button>
+        </div>
+    </div>
+    <table>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</body>
+
+<script>
+    const boxs = [...document.querySelectorAll("td")];
+    const retry = document.querySelector(".retry");
+    let count = 0;
+
+    boxs.forEach((box) => {
+        box.addEventListener("click", () => {
+            let turn = count % 2;
+            if (box.innerText == "") {
+                if (turn == 0) {
+                    box.innerHTML = "X";
+                    box.classList = "xBox";
+                } else {
+                    box.innerHTML = "O";
+                    box.classList = "yBox";
+                }
+                if (check()) {
+                    setTimeout(() => {
+                        over(turn), 1
+                    })
+                }
+                count++;
+                if (count == 9 && !check()) {
+                    setTimeout(() => {
+                        alert("무승부")
+                        reset();
+                    })
+                }
+
+            } else {
+                alert("이미선택")
+            }
+        })
+    })
+
+    function over(turn) {
+        turn == 0 ? alert("X 승리") : alert("O 승리");
+        reset();
+    }
+
+    retry.addEventListener("click", () => {
+        reset();
+    })
+
+    function reset() {
+        count = 0;
+        boxs.forEach((box) => {
+            box.innerHTML = ""
+            box.classList = ""
+        });
+        console.clear();
+    }
+
+    function check() {
+        let size = boxs.length - 1;
+        for (let i = 0; i < size; i += 3) {
+            if (boxs[i].textContent != "" && boxs[i].textContent == boxs[i + 1].textContent &&
+                boxs[i + 1].textContent == boxs[i + 2].textContent) {
+                return true;
+            }
+        }
+        for (let i = 0; i < 3; i++) {
+            if (boxs[i].textContent != "" && boxs[i].textContent == boxs[i + 3].textContent &&
+                boxs[i + 3].textContent == boxs[i + 6].textContent) {
+                return true;
+            }
+        }
+        if (boxs[0].textContent != "" && boxs[0].textContent == boxs[4].textContent && boxs[4].textContent == boxs[8].textContent ||
+            boxs[2].textContent != "" && boxs[2].textContent == boxs[4].textContent && boxs[4].textContent == boxs[6].textContent) {
+            return true;
+        }
+    }
+
+
+</script>
+
+</html>
