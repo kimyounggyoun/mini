@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+
+    <style>
+        #canvas {
+            border: 1px dashed gray;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <canvas id="canvas" width="500" height="300"></canvas>
+
+
+    <script>
+        const canvas = document.querySelector("#canvas");
+        const ctx = canvas.getContext('2d');
+
+        let key = { 'up': false, 'down': false, 'right': false, 'left': false }
+        let player = { "x": 0, "y": 0, "size": 40, "speed": 3 };
+        let keyDown = [];
+
+        window.addEventListener('keyDown', (e) => {
+            keyDown[e.key] = true;
+        })
+        window.addEventListener('keyUp', (e) => {
+            keyDown[e.key] = false;
+        })
+
+        function movePlayer() {
+            if (keyDown["ArrowUp"]) {
+                y -= player.speed;
+            } else if (keyDown["ArrowDown"]) {
+                y += player.speed;
+            } else if (keyDown["ArrowRight"]) {
+                x += player.speed;
+            } else if (keyDown["ArrowLeft"]) {
+                x -= player.speed;
+            }
+
+            if (x <= 0) x = 0;
+            if (y <= 0) y = 0;
+            if (x >= canvas.width - player.size) x = canvas.width - player.size;
+            if (y >= canvas.height - player.size) y = canvas.height - player.size;
+        }
+
+        function init() {
+            document.addEventListener('keydown', keyDownHandler);
+            document.addEventListener('keyup', keyUpHandler);
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawPlayer();
+            movePlayer();
+        }
+
+        let playerImg = new Image();
+        // playerImg.src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Pokebola-pokeball-png-0.png/220px-Pokebola-pokeball-png-0.png";
+        playerImg.src = "./poketball.png";
+
+        function drawPlayer() {
+            ctx.beginPath();
+            ctx.drawImage(playerImg, player.x, player.y, player.size, player.size);
+            // ctx.rect(player.x, player.y, player.size, player.size);
+            ctx.fillStyle = "blue";
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function movePlayer() {
+            if (key.right && player.x < canvas.width - player.size) {
+                console.log("test");
+                player.x += player.speed;
+            } else if (key.left && player.x > 0) {
+                player.x -= player.speed;
+            } else if (key.up && player.y > 0) {
+                player.y -= player.speed;
+            } else if (key.down && player.y < canvas.height - player.size) {
+                player.y += player.speed;
+            }
+        }
+
+        init();
+        window.setInterval(draw, 10);
+
+    </script>
+</body>
+
+</html>

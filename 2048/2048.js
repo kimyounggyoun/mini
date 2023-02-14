@@ -7,6 +7,15 @@ let boxs = [];
 let scr = 0;
 let ENDNUMBER = 2048;
 
+function test () {
+    board.forEach((box) => {
+        box.className = `"x"+${box.innerText}`;
+    })
+}
+
+
 boxs.forEach((box) => {
     
 })
+
+test();

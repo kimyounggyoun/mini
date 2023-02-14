@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+
+    <style>
+        #canvas {
+            border: 1px dashed gray;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <canvas id="canvas" width="500" height="300"></canvas>
+
+
+    <script>
+        const canvas = document.querySelector("#canvas");
+        const ctx = canvas.getContext('2d');
+
+       
+
+        let timer = setInterval(draws, 10);
+        // let timer2 = setInterval(draw2, 10);
+        let radius = 20;
+
+        let bx = radius;
+        let by = radius;
+
+        let cx = radius;
+        let cy = radius;
+
+        function draws(){
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            draw();
+            draw2();
+        }
+
+        function draw() {
+            ctx.beginPath();
+            ctx.arc(bx, 150, 20, 0, Math.PI * 2);
+            ctx.fillStyle = "green";
+            ctx.fill();
+            bx += 10;
+            if(bx >= canvas.width -20) {
+                clearInterval(timer);
+            }
+        }
+        
+        function draw2() {
+        
+            ctx.beginPath();
+            ctx.arc(cx, 100, 20, 0, Math.PI * 2);
+            ctx.fillStyle = "red";
+            ctx.fill();
+            cx += 10;
+            if(cx >= canvas.width -20) {
+                clearInterval(timer2);
+            }
+        }
+
+        canvas.addEventListener("click", () => {
+            clearInterval(timer);
+        })
+
+        // canvas.addEventListener("click", () => {
+        //     clearInterval(timer2);
+        // })
+
+
+    </script>
+</body>
+
+</html>
