@@ -4,53 +4,55 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>2048 project</title>
     <link rel='stylesheet' type='text/css' media='screen' href='2048.css'>
-    <script src='2048.js'></script>
-
+    <script src='2048.js' defer></script>
 </head>
 
 <body>
-    <div class="board">
-    <div class="top">
-        <div class="timer">
-            <p class="timer_text">TIMER</p>
-            <p class="timer_main">00 : 00</p>
-        </div>
-        <div class="title">2048</div>
-        <div class="score">
-            <p class="score_text">SCORE</p>
-            <p class="score_main">0</p>
+    <div class=backGround>
+        <div class="view">
+            <div class="top">
+                <div class="HScore">
+                    <p class="HScore_text">HIGH SCORE</p>
+                    <p class="HScore_main">0</p>
+                </div>
+                <div class="title">2048</div>
+                <div class="score">
+                    <p class="score_text">SCORE</p>
+                    <p class="score_main">0</p>
+                </div>
+            </div>
+            <div class="mid">
+                <table class="board">
+                    <tr class=board_cell>
+                        <td id="0-0"></td>
+                        <td id="0-1"></td>
+                        <td id="0-2"></td>
+                        <td id="0-3"></td>
+                    </tr>
+                    <tr class=board_cell>
+                        <td id="1-0"></td>
+                        <td id="1-1"></td>
+                        <td id="1-2"></td>
+                        <td id="1-3"></td>
+                    </tr>
+                    <tr class=board_cell>
+                        <td id="2-0"></td>
+                        <td id="2-1"></td>
+                        <td id="2-2"></td>
+                        <td id="2-3"></td>
+                    </tr>
+                    <tr class=board_cell>
+                        <td id="3-0"></td>
+                        <td id="3-1"></td>
+                        <td id="3-2"></td>
+                        <td id="3-3"></td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
-    <table>
-        <tr>
-            <td id="00" class="x2">2</td>
-            <td class="01">2</td>
-            <td class="02">4</td>
-            <td class="03">2</td>
-        </tr>
-        <tr>
-            <td class="10">4</td>
-            <td class="11">4</td>
-            <td class="12">8</td>
-            <td class="13">16</td>
-        </tr>
-        <tr>
-            <td class="20"></td>
-            <td class="21"></td>
-            <td class="22"></td>
-            <td class="23"></td>
-        </tr>
-        <tr>
-            <td class="30"></td>
-            <td class="31"></td>
-            <td class="32"></td>
-            <td class="33"></td>
-        </tr>
-    </table>
-</div>
 </body>
 
 </html>

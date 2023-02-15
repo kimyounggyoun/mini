@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td {
+            width: 100px;
+            height: 100px;
+            border: 1px solid;
+            text-align: center;
+            font-size: 35px;
+
+
+        }
+
+        td:hover {
+            font-size: 40px;
+            transition: font-size 0.5s;
+            cursor: pointer;
+        }
+
+        .active {
+            animation: change 0.2s 0.1s;
+        }
+
+        .remove {
+            animation: fade 0.1s;
+        }
+
+        @keyframes change {
+            0% {
+                transform: translateY(0%)
+            }
+
+            to {
+                transform: translateY(100%)
+            }
+        }
+
+        @keyframes fade {
+            0% {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+
+        tr:nth-child(1) {
+            background-color: lightgreen
+        }
+
+        tr:nth-child(2) {
+            background-color: lightpink
+        }
+
+        tr:nth-child(3) {
+            background-color: lightblue
+        }
+
+        tr:nth-child(4) {
+            background-color: rgb(241, 241, 186)
+        }
+
+        tr:nth-child(5) {
+            background-color: lightsalmon
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <table>
+            <tr>
+                <!-- 컬럼 인덱스 넣기  -->
+                <td class="item" data-y="0" data-x="0"><span>1</span></td>
+                <td class="item" data-y="0" data-x="1"><span>2</span></td>
+                <td class="item" data-y="0" data-x="2"><span>3</span></td>
+                <td class="item" data-y="0" data-x="3"><span>4</span></td>
+                <td class="item" data-y="0" data-x="4"><span>5</span></td>
+            </tr>
+            <tr>
+                <td class="item" data-y="1" data-x="0"><span>6</span></td>
+                <td class="item" data-y="1" data-x="1"><span>7</span></td>
+                <td class="item" data-y="1" data-x="2"><span>8</span></td>
+                <td class="item" data-y="1" data-x="3"><span>9</span></td>
+                <td class="item" data-y="1" data-x="4"><span>10</span></td>
+            </tr>
+            <tr>
+                <td class="item" data-y="2" data-x="0"><span>11</span></td>
+                <td class="item" data-y="2" data-x="1"><span>12</span></td>
+                <td class="item" data-y="2" data-x="2"><span>13</span></td>
+                <td class="item" data-y="2" data-x="3"><span>14</span></td>
+                <td class="item" data-y="2" data-x="4"><span>15</span></td>
+            </tr>
+            <tr>
+                <td class="item" data-y="3" data-x="0"><span>16</span></td>
+                <td class="item" data-y="3" data-x="1"><span>17</span></td>
+                <td class="item" data-y="3" data-x="2"><span>18</span></td>
+                <td class="item" data-y="3" data-x="3"><span>19</span></td>
+                <td class="item" data-y="3" data-x="4"><span>20</span></td>
+            </tr>
+            <tr>
+                <td class="item" data-y="4" data-x="0"><span>21</span></td>
+                <td class="item" data-y="4" data-x="1"><span>22</span></td>
+                <td class="item" data-y="4" data-x="2"><span>23</span></td>
+                <td class="item" data-y="4" data-x="3"><span>24</span></td>
+                <td class="item" data-y="4" data-x="4"><span>25</span></td>
+            </tr>
+        </table>
+        <script>
+            let nodelist = [...document.querySelectorAll("td")];
+
+            let tdlist = [];
+            let oneTd = []
+            let x = 0;
+            let y = 0;
+
+            let cnt = 0;
+            let temp1 = 0;
+            let temp2 = 0;
+
+            nodelist.forEach((node) => {
+
+                node.addEventListener("click", (e) => {
+
+                    cnt++;
+                    if (cnt == 1) {
+                        temp1 = event.target;
+                        // console.log("temp1= ", temp1);
+                        //console.log(temp1.getAttribute("data-x") ,":", temp1.getAttribute("data-y"));
+
+                    } else if (cnt == 2) {
+                        temp2 = event.target;
+                        //   console.log("temp2= ", temp2);
+                        checkData();
+                    }
+
+                });
+
+                oneTd[x] = node;
+                x++;
+                if (oneTd.length == 5) {
+                    tdlist[y] = oneTd;
+                    y++;
+                    oneTd = [];
+                    x = 0;
+                }
+            })
+
+            console.log(tdlist);
+            checkInterval();
+
+
+            function checkData() {
+                cnt = 0;
+                if (temp1 == 0 || temp2 == 0) {
+                    return;
+                }
+                if (temp1 === temp2) {
+                    console.log("같은거 두번 클릭");
+                    return;
+                }
+                let x1 = temp1.getAttribute("data-x");
+                let y1 = temp1.getAttribute("data-y");
+
+                let x2 = temp2.getAttribute("data-x");
+                let y2 = temp2.getAttribute("data-y");
+
+                // console.log("test" , tdlist[y1][x1].innerHTML);
+                //  console.log("test" , tdlist[y2][x2].innerHTML);
+
+                tdlist[y1][x1].classList.add("active");
+                tdlist[y2][x2].classList.add("active");
+
+                setTimeout(() => {
+                    let temp = tdlist[y1][x1].innerHTML;
+                    tdlist[y1][x1].innerHTML = tdlist[y2][x2].innerHTML;
+                    tdlist[y2][x2].innerHTML = temp;
+
+                    tdlist[y1][x1].classList.remove("active");
+                    tdlist[y2][x2].classList.remove("active");
+
+                }, 300)
+
+            }
+
+            function checkInterval() {
+                let start = tdlist.length - 1;
+                let end = 0;
+
+                let time = setInterval(() => {
+                    if (start == end) { clearInterval(time); }
+
+                    start = clearData(start, end);
+
+                }, 500)
+
+            }
+
+            function clearData(start, end) {
+                if (start - 1 < 0) {
+                    let randomNum = Math.floor(Math.random() * 5) + 1;
+                    tdlist[start][0].firstChild.innerHTML = randomNum;
+                } else {
+                    tdlist[start - 1][0].classList.add("active");
+                    tdlist[start][0].classList.add("remove");
+                    setTimeout(() => {
+                        tdlist[start][0].classList.remove("remove");
+                        tdlist[start][0].firstChild.innerHTML = tdlist[start - 1][0].firstChild.innerHTML;
+                        tdlist[start - 1][0].classList.remove("active");
+                    }, 200);
+
+                }
+                return start - 1;
+            }
+
+        </script>
+    </div>
+</body>
+
+</html>

@@ -10,9 +10,20 @@ body {
     justify-content: center;
 }
 
-.board{
-    width: 420px;
-    height: 484px;
+.backGround {
+    width: 480px;
+    height: 800px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: black;
+    
+}
+.view{
+    width: 480px;
+    height: 800px;
 
     display: flex;
     align-items: center;
@@ -43,7 +54,7 @@ body {
     font-weight: bold;
 
 }
-.timer {
+.HScore {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,7 +68,7 @@ body {
 
     background-color: rgba(49, 49, 49, 0.5);
 }
-.timer_main{
+.HScore_main{
     width: 90%;
     height: 50%;
     border-radius: 5px;
@@ -104,7 +115,8 @@ body {
 }
 
 table{
-    width: 410px;
+    width: 460px;
+    height: 460px;
     border-spacing: 5px;
 }
 
@@ -113,13 +125,69 @@ td {
     height: 100px;
 
     border-radius: 10px;
-
     background-color:rgba(49, 49, 49, 0.5);
-    text-align: center;
-    font-size: 50px;
+    
+}
+
+.box{
+    margin-left: 5px;
+
+    width: 90%;
+    height: 90%;
+
+    border-radius: 10px;
+    background-color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 35px;
     font-weight: bold;
 }
 
-.x2 {
 
+.x2 {
+    background-color: rgb(203, 212, 78);
+    color: rgb(46, 46, 46);
+}
+.x4 {
+    background-color: rgb(133, 206, 91);
+    color: rgb(56, 56, 56);
+}
+.x8 {
+    background-color: rgb(61, 202, 84);
+    color: rgb(0, 0, 0);
+}
+.x16 {
+    background-color: rgb(78, 212, 194);
+    color: rgb(0, 0, 0);
+}
+.x32 {
+    background-color: rgb(78, 158, 212);
+    color: rgb(0, 0, 0);
+}
+.x64 {
+    background-color: rgb(78, 91, 212);
+    color: rgb(233, 233, 233);
+}
+.x128 {
+    background-color: rgb(107, 78, 212);
+    color: rgb(255, 255, 255);
+}
+.x256 {
+    background-color: rgb(169, 78, 212);
+    color: rgb(255, 255, 255);
+}
+.x512 {
+    background-color: rgb(212, 78, 167);
+    color: rgb(255, 255, 255);
+}
+.x1024 {
+    background-color: rgb(212, 78, 118);
+    color: rgb(255, 255, 255);
+}
+.x2048 {
+    background-color: rgb(197, 54, 54);
+    color: rgb(255, 255, 255);
 }
