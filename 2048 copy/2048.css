@@ -9,107 +9,6 @@ body {
     justify-content: center;
 }
 
-.mid {
-    position: relative;
-
-}
-
-.overPage {
-    width: 480px;
-    height: 800px;
-    position: absolute;
-    z-index: 10;
-    top: -43%;
-    left: -2%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    opacity: 0;
-}
-
-.overBack {
-    width: 100%;
-    height: 100%;
-    background-image: url(https://booth.pximg.net/d21410b8-042b-428f-a572-5b856c0e4ae7/i/2016279/892b35ea-f60a-43e3-a408-c0616688dea9_base_resized.jpg);
-    position: absolute;
-
-    z-index: 5;
-    opacity: 0.6;
-}
-
-.overBox {
-    width: 300px;
-    height: 180px;
-    background-image: url(https://thumb.photo-ac.com/8a/8ae1e4705510477f6b93dbb672972ca3_t.jpeg);
-    background-size: 100%;
-    border-radius: 15px;
-
-    z-index: 10;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    flex-direction: column;
-    gap: 10px;
-}
-
-.overText {}
-
-.win {
-    position: absolute;
-    opacity: 0;
-}
-
-.lose {
-    opacity: 0;
-}
-
-.overScore {
-    width: 150px;
-    height: 30px;
-    background-color: lightcyan;
-    border-radius: 8px;
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-bottom: 55px;
-
-    display: flex;
-    text-align: center;
-    font-weight: bold;
-}
-
-.overScore1 {
-    width: 50%;
-    height: 100%;
-    margin-top: 3px;
-}
-
-.overScore2 {
-    width: 50%;
-    height: 100%;
-    margin-top: 3px;
-}
-
-.retry {
-    position: absolute;
-    top: 54%;
-
-    width: 40px;
-    height: 40px;
-    background-image: url(./resetBtn.png);
-    background-size: 100%;
-}
-
-.retry:active {
-    width: 38px;
-    height: 38px;
-}
-
-
-
 .backGround {
     width: 480px;
     height: 800px;
@@ -219,14 +118,9 @@ body {
 }
 
 table {
-    position: relative;
-    top: 0;
-    left: 0;
     width: 460px;
     height: 460px;
     border-spacing: 5px;
-
-    z-index: 5;
 }
 
 td {
@@ -253,7 +147,6 @@ td {
     font-size: 35px;
     font-weight: bold;
 }
-
 
 .x2 {
     background-color: rgb(203, 212, 78);

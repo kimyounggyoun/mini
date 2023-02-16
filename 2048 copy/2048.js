@@ -2,10 +2,6 @@ const tds = [...document.querySelectorAll("td")];
 const playScore = document.querySelector(".score_main");
 const highScore = document.querySelector(".HScore_main");
 
-const overScreen = document.querySelector(".overPage");
-const win = document.querySelector(".win");
-const lose = document.querySelector(".lose");
-
 let score = 0;
 let max = 4;
 let gameOver = false;
@@ -19,8 +15,8 @@ let endNumber = false;
 // ];
 
 let board = [
-  [2, 1024, 2, 0],
-  [0, 1024, 0, 2],
+  [2, 0, 2, 0],
+  [0, 2, 0, 2],
   [2, 0, 2, 0],
   [0, 2, 0, 2],
 ];
@@ -203,32 +199,18 @@ function reset() {
 }
 
 function gameOverCheck() {
-  // 게임오버 체크
   setInterval(() => {
-    if ((!doNotSlide() && !endNumber) || endNumber) {
-      gameOverScreen();
-      let overScore = document.querySelector(".overScore2");
-      overScore.innerHTML = score;
-
-      let retry = document.querySelector(".retry");
-      retry.addEventListener("click", (e) => {
-        reset();
-        overScreen.style.opacity = "0";
-        win.style.opacity = "0";
-        lose.style.opacity = "0";
-      });
+    if (!doNotSlide() && !endNumber) {
+      console.log("게임오버");
+      alert("게임오버");
+      reset();
     }
-  }, 100);
-}
-
-function gameOverScreen() {
-  // 게임오버 창 띄우기
-  overScreen.style.opacity = "1";
-  if (endNumber) {
-    win.style.opacity = "1";
-  } else {
-    lose.style.opacity = "1";
-  }
+    if (endNumber) {
+      console.log("2048!!");
+      alert("2048!!");
+      reset();
+    }
+  }, 1);
 }
 
 function doNotSlide() {
