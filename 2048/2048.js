@@ -11,23 +11,18 @@ let max = 4;
 let gameOver = false;
 let endNumber = false;
 
-// let board = [
-//   [0, 0, 0, 0],
-//   [0, 0, 0, 0],
-//   [0, 0, 0, 0],
-//   [0, 0, 0, 0],
-// ];
-
 let board = [
-  [2, 1024, 2, 0],
-  [0, 1024, 0, 2],
-  [2, 0, 2, 0],
-  [0, 2, 0, 2],
+  [0, 0, 0, 0],
+  [0, 0, 0, 0],
+  [0, 0, 0, 0],
+  [0, 0, 0, 0]
 ];
+
 
 // 실행시 박스생성
 window.onload = function () {
   setGame();
+  keyup();
 };
 
 // 시작 밑 박스 수정, 생성
@@ -35,8 +30,6 @@ function setGame() {
   tds.forEach((td) => {
     td.innerHTML = "";
   });
-  boxMaker();
-  console.log(board);
   for (let i = 0; i < max; i++) {
     for (let k = 0; k < max; k++) {
       let num = board[i][k];
@@ -52,9 +45,10 @@ function setGame() {
       idBox = document.getElementById(id).append(box);
     }
   }
+  boxMaker();
 }
 
-//랜덤박스 생성
+//새로운 박스 생성
 function boxMaker() {
   let makeBox = 0;
   board.forEach((i) => {
@@ -70,24 +64,33 @@ function boxMaker() {
     let x = Math.floor(Math.random() * 4);
     if (board[y][x] == 0) {
       board[y][x] = Math.floor(Math.random * 3) > 0 ? 4 : 2;
+
+      let box = document.createElement("div");
+      box.classList.add("box");
+      box.classList.add("x" + board[y][x]);
+      box.classList.add("newBox");
+      box.innerText = board[y][x].toString();
+      let id = y.toString() + "-" + x.toString();
+      idBox = document.getElementById(id).append(box);
       makeBox--;
     }
   }
 }
 
 // 컨트롤러
-document.addEventListener("keyup", (e) => {
-  if (e.code == "ArrowUp") {
-    slideUp();
-  } else if (e.code == "ArrowDown") {
-    slideDown();
-  } else if (e.code == "ArrowLeft") {
-    slideLeft();
-  } else if (e.code == "ArrowRight") {
-    slideRight();
-  }
-  gameOverCheck();
-});
+function keyup() {
+  document.addEventListener("keyup", (e) => {
+    if (e.code == "ArrowUp" && !endNumber && !gameOver) {
+      slideUp();
+    } else if (e.code == "ArrowDown" && !endNumber && !gameOver) {
+      slideDown();
+    } else if (e.code == "ArrowLeft" && !endNumber && !gameOver) {
+      slideLeft();
+    } else if (e.code == "ArrowRight" && !endNumber && !gameOver) {
+      slideRight();
+    }
+  });
+}
 
 // 상단슬라이드
 function slideUp() {
@@ -122,7 +125,6 @@ function slideLeft() {
   for (let i = 0; i < max; i++) {
     let temp = board[i];
     temp = zeroSwitch(temp);
-    console.log(temp);
     temp = boxSlide(temp);
     board[i] = zeroSwitch(temp);
   }
@@ -142,6 +144,17 @@ function slideRight() {
   update();
 }
 
+// 우측 이동 배열을 좌측으로 반전하고 계산할때 사용
+function reverse(arr) {
+  let half = max / 2;
+  for (let i = 0; i < half; i++) {
+    temp = arr[i];
+    arr[i] = arr[max - 1 - i];
+    arr[max - 1 - i] = temp;
+  }
+  return arr;
+}
+
 // 박스 이동, 스코어 계산
 function boxSlide(temp) {
   for (let k = 0; k < max; k++) {
@@ -152,17 +165,6 @@ function boxSlide(temp) {
     }
   }
   return temp;
-}
-
-// 우측 이동 배열을 좌측으로 반전하고 계산할때 사용
-function reverse(arr) {
-  let half = max / 2;
-  for (let i = 0; i < half; i++) {
-    temp = arr[i];
-    arr[i] = arr[max - 1 - i];
-    arr[max - 1 - i] = temp;
-  }
-  return arr;
 }
 
 // 배열 중간의 0 값을 맨뒤로 보내주는 역할
@@ -185,8 +187,58 @@ function zeroSwitch(arr) {
 function update() {
   playScore.innerText = score;
   setGame();
+  gameOverCheck();
 }
 
+function gameOverCheck() {
+  // 게임오버 체크
+  doNotSlide();
+  setInterval(() => {
+    if (gameOver || endNumber) {
+      gameOverScreen();
+      let overScore = document.querySelector(".overScore2");
+      overScore.innerHTML = score;
+      let retry = document.querySelector(".retry");
+      retry.addEventListener("click", (e) => {
+        reset();
+        overScreen.style.opacity = "0";
+        win.style.opacity = "0";
+        lose.style.opacity = "0";
+      });
+    }
+  }, 100);
+}
+// 게임오버 체크 2
+function doNotSlide() {
+  let temp = zeroSwitch(board);
+  let doNotSlideCheck = 0;
+  for (let i = 0; i < max; i++) {
+    for (let k = 0; k < max; k++) {
+      if (temp[i][k] == 2048) {
+        endNumber = true;
+      }
+      if (temp[i][k] == 0 ||
+        (i != 0 && temp[i][k] == temp[i - 1][k]) ||
+        (i != 3 && temp[i][k] == temp[i + 1][k]) ||
+        (k != 3 && temp[i][k] == temp[i][k + 1]) ||
+        (k != 0 && temp[i][k] == temp[i][k - 1])
+      ) {
+        doNotSlideCheck = 1;
+      }
+    }
+  }
+  gameOver = doNotSlideCheck == 0 ? true : false;
+}
+// 게임오버 창 띄우기
+function gameOverScreen() {
+  overScreen.style.opacity = "1";
+  if (endNumber) {
+    win.style.opacity = "1";
+  } else {
+    lose.style.opacity = "1";
+  }
+}
+// 게임오버창 => 리셋버튼클릭
 function reset() {
   endNumber = false;
   gameOver = false;
@@ -200,54 +252,4 @@ function reset() {
     }
   }
   setGame();
-}
-
-function gameOverCheck() {
-  // 게임오버 체크
-  setInterval(() => {
-    if ((!doNotSlide() && !endNumber) || endNumber) {
-      gameOverScreen();
-      let overScore = document.querySelector(".overScore2");
-      overScore.innerHTML = score;
-
-      let retry = document.querySelector(".retry");
-      retry.addEventListener("click", (e) => {
-        reset();
-        overScreen.style.opacity = "0";
-        win.style.opacity = "0";
-        lose.style.opacity = "0";
-      });
-    }
-  }, 100);
-}
-
-function gameOverScreen() {
-  // 게임오버 창 띄우기
-  overScreen.style.opacity = "1";
-  if (endNumber) {
-    win.style.opacity = "1";
-  } else {
-    lose.style.opacity = "1";
-  }
-}
-
-function doNotSlide() {
-  let temp = board;
-  temp = zeroSwitch(temp);
-  for (let i = 0; i < max; i++) {
-    for (let k = 0; k < max; k++) {
-      if (temp[i][k] == 2048) {
-        endNumber = true;
-      }
-      if (
-        (i != 0 && temp[i][k] == temp[i - 1][k]) ||
-        (i != 3 && temp[i][k] == temp[i + 1][k]) ||
-        (k != 3 && temp[i][k] == temp[i][k + 1]) ||
-        (k != 0 && temp[i][k] == temp[i][k - 1])
-      ) {
-        return true;
-      }
-    }
-  }
-  return false;
 }
