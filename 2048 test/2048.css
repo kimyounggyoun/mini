@@ -252,14 +252,89 @@ td {
     font-size: 35px;
     font-weight: bold;
 }
+
 .newBox {
-    animation: show 0.4s ease-in-out;
+    animation: newBoxShow 0.4s ease-in-out;
 }
 
-@keyframes show {
+@keyframes newBoxShow {
     0% {
         opacity: .5;
         transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.mixBox {
+    animation: mixBoxShow 0.4s ease-in-out;
+}
+
+@keyframes mixBoxShow {
+    30% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1.0);
+    }
+}
+
+.leftSlide {
+    animation: leftSlideShow 0.1s ease-in-out;
+}
+
+@keyframes leftSlideShow {
+    0% {
+        transform: translateX(0%)
+    }
+
+    to {
+        transform: translateX(-100%)
+    }
+}
+
+.rightSlide {
+    animation: rightSlideShow 0.1s ease-in-out;
+}
+
+@keyframes rightSlideShow {
+    0% {
+        transform: translateX(0%)
+    }
+
+    to {
+        transform: translateX(100%)
+    }
+}
+
+.upSlide {
+    animation: upSlideShow 0.1s ease-in-out;
+}
+
+@keyframes upSlideShow {
+    0% {
+        transform: translateY(0%)
+    }
+
+    to {
+        transform: translateY(-100%)
+    }
+}
+
+.downSlide {
+    animation: downSlideShow 0.1s ease-in-out;
+}
+
+@keyframes downSlideShow {
+    0% {
+        transform: translateX(0%)
+    }
+
+    to {
+        transform: translateX(100%)
     }
 }
 

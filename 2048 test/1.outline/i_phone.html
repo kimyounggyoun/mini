@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Main Screen</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .out {
+            background-image: url(back_ip.png);
+            background-size: 100%;
+            width: 540px;
+            height: 1072px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .over {
+            position: absolute;
+            z-index: -1;
+        }
+
+        .in {
+            border-radius: 60px;
+            width: 480px;
+            height: 1024px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            flex-direction: column;
+        }
+
+        .top {
+            background-color: rgb(255, 255, 255);
+            background-image: url(back_ip_top.png);
+            border-radius: 60px 60px 0 0;
+            width: 480px;
+            height: 112px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #time {
+            width: 100px;
+            height: 50px;
+            margin-right: 300px;
+            margin-bottom: 20px;
+
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        .main {
+            background-image: url(wallpaper.jpg);
+            background-size: 100%;
+            backdrop-filter: blur(20px);
+            width: 480px;
+            height: 800px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mainIcon {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+
+            border-radius: 15px;
+            width: 80px;
+            height: 80px;
+            margin-left: 15px;
+            margin-top: 20px;
+            box-shadow: 7px 9px 15px 2px rgba(0, 0, 0, 0.48);
+            background-image: url(icon_launcher.png);
+            background-size: 100%;
+            border: 5px solid rgba(255, 255, 255, 0.527);
+        }
+
+        .mainIcon:active {
+            width: 76px;
+            height: 76px;
+            margin-left: 17px;
+            margin-top: 22px;
+        }
+
+        .appBox {
+            position: absolute;
+
+            background-color: rgba(255, 255, 255, 0.74);
+            border-radius: 30px;
+            width: 440px;
+            height: 500px;
+
+            display: grid;
+            grid-template-columns: repeat(4, 4fr);
+            grid-auto-rows: repeat(4, 4fr);
+
+            scale: 0;
+        }
+
+        .appBoxShow {
+            animation: Show 0.4s ease-in-out;
+        }
+
+        @keyframes Show {
+            0% {
+                opacity: .2;
+                transform: scale(0);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .app {
+            border-radius: 15px;
+            width: 80px;
+            height: 80px;
+            margin-left: 15px;
+            margin-top: 20px;
+        }
+
+        .app:active {
+            width: 76px;
+            height: 76px;
+            margin-left: 17px;
+            margin-top: 22px;
+        }
+
+        .app_1 {
+            box-shadow: 7px 9px 15px 2px rgba(0, 0, 0, 0.48);
+            background-image: url(icon_2048_2.png);
+            background-size: 100%;
+            border: 5px solid rgba(255, 255, 255, 0.527);
+        }
+
+        .app_2 {
+            box-shadow: 7px 9px 15px 2px rgba(0, 0, 0, 0.48);
+            background-image: url(icon_horseracing_1.png);
+            background-size: 100%;
+            border: 5px solid rgba(255, 255, 255, 0.527);
+        }
+
+        .app_3 {
+            box-shadow: 7px 9px 15px 2px rgba(0, 0, 0, 0.48);
+            background-color: lightpink;
+            background-size: 100%;
+            border: 5px solid rgba(255, 255, 255, 0.527);
+        }
+
+
+
+        .bot {
+            background-color: rgba(255, 255, 255, 0.74);
+            border-radius: 0 0 60px 60px;
+            width: 480px;
+            height: 112px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .homeBtn {
+            background-color: rgb(8, 8, 8);
+            border: 4px solid gray;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+        }
+
+        .homeBtn:active {
+            width: 67px;
+            height: 67px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="out">
+        <div class="in">
+            <div class="top">
+                <div id="time"></div>
+            </div>
+            <div class="main">
+                <div class="mainIcon"></div>
+                <div class="appBox">
+                    <div class="app app_1"></div>
+                    <div class="app app_2"></div>
+                    <div class="app app_3"></div>
+                    <div class="app app_4"></div>
+                    <div class="app app_5"></div>
+                    <div class="app app_6"></div>
+                    <div class="app app_7"></div>
+                    <div class="app app_8"></div>
+                    <div class="app app_9"></div>
+                    <div class="app app_10"></div>
+                    <div class="app app_11"></div>
+                    <div class="app app_12"></div>
+                    <div class="app app_13"></div>
+                    <div class="app app_14"></div>
+                    <div class="app app_15"></div>
+                    <div class="app app_16"></div>
+                </div>
+            </div>
+            <div class="bot">
+                <div class="homeBtn"></div>
+            </div>
+        </div>
+        <div class="out over"></div>
+    </div>
+
+
+
+    <script>
+        // UI 좌측상단 디지털시계
+        window.onload = function () {
+            time();
+            setInterval(time, 20000);
+            mainIconClick();
+            homeBtnClick();
+        }
+
+        function time() {
+            let timeBox = document.querySelector("#time");
+            let date = new Date();
+            let hour = modifyNumber(date.getHours());
+            let min = modifyNumber(date.getMinutes());
+            timeBox.innerHTML = hour + " : " + min;
+        }
+        function modifyNumber(time) {
+            if (parseInt(time) < 10) {
+                return "0" + time;
+            }
+            else
+                return time;
+        }
+
+        let on = false;
+        function mainIconClick() {
+            let mainIcon = document.querySelector(".mainIcon");
+            mainIcon.addEventListener(('click'), () => {
+                let appBox = document.querySelector(".appBox");
+                if (!on) {
+                    appBox.classList.add("appBoxShow");
+                    appBox.style.scale = "1";
+                    on = true;
+                } else {
+                    appBox.classList.remove("appBoxShow");
+                    appBox.style.scale = "0";
+                    on = false;
+                }
+            })
+        }
+
+        function homeBtnClick() {
+            let homeBtn = document.querySelector(".homeBtn");
+            homeBtn.addEventListener(('click'), () => {
+                let appBox = document.querySelector(".appBox");
+                if (on) {
+                    appBox.style.scale = "0";
+                    appBox.classList.remove("appBoxShow");
+                    on = false;
+                }
+            })
+        }
+
+        function app_1() {
+            let app_1 = document.querySelector(".app_1");
+            homeBtn.addEventListener(('click'), () => {
+
+            })
+        }
+
+
+    </script>
+</body>
+
+</html>

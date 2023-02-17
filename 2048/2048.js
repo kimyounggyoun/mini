@@ -1,7 +1,5 @@
 const tds = [...document.querySelectorAll("td")];
 const playScore = document.querySelector(".score_main");
-const highScore = document.querySelector(".HScore_main");
-
 const overScreen = document.querySelector(".overPage");
 const win = document.querySelector(".win");
 const lose = document.querySelector(".lose");
@@ -15,9 +13,8 @@ let board = [
   [0, 0, 0, 0],
   [0, 0, 0, 0],
   [0, 0, 0, 0],
-  [0, 0, 0, 0]
+  [0, 0, 0, 0],
 ];
-
 
 // 실행시 박스생성
 window.onload = function () {
@@ -217,7 +214,8 @@ function doNotSlide() {
       if (temp[i][k] == 2048) {
         endNumber = true;
       }
-      if (temp[i][k] == 0 ||
+      if (
+        temp[i][k] == 0 ||
         (i != 0 && temp[i][k] == temp[i - 1][k]) ||
         (i != 3 && temp[i][k] == temp[i + 1][k]) ||
         (k != 3 && temp[i][k] == temp[i][k + 1]) ||
@@ -242,8 +240,9 @@ function gameOverScreen() {
 function reset() {
   endNumber = false;
   gameOver = false;
-  if (highScore < score) {
-    highScore = score;
+  let highScore = document.querySelector(".HScore_main");
+  if (Number(highScore.innerText) < score) {
+    highScore.innerText = score;
   }
   score = 0;
   for (let i = 0; i < max; i++) {

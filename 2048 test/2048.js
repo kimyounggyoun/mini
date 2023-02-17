@@ -8,14 +8,14 @@ let score = 0;
 let max = 4;
 let gameOver = false;
 let endNumber = false;
+let slideDir = -1;
 
 let board = [
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 0, 0, 0]
+  [16, 8, 128, 512],
+  [256, 2, 2048, 16],
+  [32, 4, 8, 128],
+  [256, 128, 512, 64],
 ];
-
 
 // 실행시 박스생성
 window.onload = function () {
@@ -75,17 +75,31 @@ function boxMaker() {
   }
 }
 
+function boxUpdate(tileNum, y, x) {
+  let box = document.createElement("div");
+  box.classList.add("box");
+  box.classList.add("x" + tileNum);
+  box.classList.add("mixBox");
+  box.innerText = board[y][x].toString();
+  let id = y.toString() + "-" + x.toString();
+  idBox = document.getElementById(id).append(box);
+}
+
 // 컨트롤러
 function keyup() {
   document.addEventListener("keyup", (e) => {
     if (e.code == "ArrowUp" && !endNumber && !gameOver) {
       slideUp();
+      slideDir = 0;
     } else if (e.code == "ArrowDown" && !endNumber && !gameOver) {
       slideDown();
+      slideDir = 1;
     } else if (e.code == "ArrowLeft" && !endNumber && !gameOver) {
       slideLeft();
+      slideDir = 2;
     } else if (e.code == "ArrowRight" && !endNumber && !gameOver) {
       slideRight();
+      slideDir = 3;
     }
   });
 }
@@ -168,17 +182,33 @@ function boxSlide(temp) {
 // 배열 중간의 0 값을 맨뒤로 보내주는 역할
 function zeroSwitch(arr) {
   let zeroCount = 0;
-  for (let i = 0; i < max; i++) {
-    if (arr[i] == 0) {
-      arr.splice(i, 1);
-      i--;
+  for (let k = 0; k < max; k++) {
+    if (arr[k] == 0) {
+      arr.splice(k, 1);
+      k--;
       zeroCount++;
     }
   }
-  for (let i = 0; i < zeroCount; i++) {
+  for (let k = 0; k < zeroCount; k++) {
     arr.push(0);
   }
   return arr;
+}
+
+// 불가능할듯
+function slideMotion(y, x) {
+  let id = y.toString() + "-" + x.toString();
+  let box = document.getElementById(`${id}`);
+  let dir;
+  if (slideDir == 0) {
+    box.firstElementChild.classList.add("upSlide");
+  } else if (slideDir == 1) {
+    box.classList.add("downSlide");
+  } else if (slideDir == 2) {
+    box.classList.add("leftSlide");
+  } else if (slideDir == 3) {
+    box.classList.add("rightSlide");
+  }
 }
 
 // 수정된 박스 값 교체
@@ -215,7 +245,8 @@ function doNotSlide() {
       if (temp[i][k] == 2048) {
         endNumber = true;
       }
-      if (temp[i][k] == 0 ||
+      if (
+        temp[i][k] == 0 ||
         (i != 0 && temp[i][k] == temp[i - 1][k]) ||
         (i != 3 && temp[i][k] == temp[i + 1][k]) ||
         (k != 3 && temp[i][k] == temp[i][k + 1]) ||
