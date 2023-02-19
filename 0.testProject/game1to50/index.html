@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>game1to50</title>
+    <script defer src="./App.js"></script>
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+  
+        }
+        html,body{
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .container{
+            display: flex;
+            flex-wrap: wrap;
+            opacity: 1;
+            width: 80%;
+            height: 80%;
+            align-items: center;
+            justify-content: center;
+        }
+    
+        .box{
+            /* wrap 5개 고정  */
+            width: 250px;
+            max-width: 250px;
+            height: 100px;
+            background-color: slateblue;
+            color: white;
+            border: 1px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: 600;
+            opacity: 1;
+           
+            
+        }
+        .hint{
+            background-color: pink;
+        }
+        .timer{
+            margin: 20px 0;
+            width: 20%;
+            background-color: skyblue;
+            
+            opacity: 0;
+            height: 10vh;
+            font-size: 2em;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }       
+         .recode{
+            height: 20vh;
+            background-color: rgba(233,123,123,0.6);
+            font-size: 2em;
+            font-weight: 800;
+        }
+      
+        button{
+        border: none;
+        background-color: rgba(233,123,123,0.6);
+        width: 200px;
+        height: 100px;
+        border-radius: 20px;
+        font-size: 30px;
+        font-weight: 600;
+        cursor: pointer; 
+        /* 마우스 포인트를 클릭으로 변경시켜줌  */
+        margin-top: 80px;
+}
+
+    </style>
+</head>
+<body>
+    <button id="start"> 게임 시작</button>
+    <div class="timer"> 12.00</div>
+    <div class="container">
+    </div>
+
+    
+</body>
+</html>
